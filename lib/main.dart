@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/Screens/First_Screen/First_Screen.dart';
+import 'package:food_app/Screens/First_Screen/Platters.dart';
 
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-       home:FirstScreen(),
+       home:PlattersScreen(),
     );
   }
 }

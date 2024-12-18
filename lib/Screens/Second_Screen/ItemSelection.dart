@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Screens/Second_Screen/Components/Floating_Button.dart';
 import 'package:food_app/Screens/Second_Screen/Components/Switch_toggler_widget.dart';
-import 'package:food_app/Screens/Third_Screen/Third_Screen.dart';
+import 'package:food_app/Screens/Third_Screen/FillDetails.dart';
 
-class SouthIndianBreakfastPage extends StatefulWidget {
+class ItemSelectionScreen extends StatefulWidget {
   final int price;// Add a price parameter
   final String name; // Add a name parameter
-  const SouthIndianBreakfastPage({Key? key, required this.price,required this.name}) : super(key: key);
+  const ItemSelectionScreen({Key? key, required this.price,required this.name}) : super(key: key);
 
   @override
-  _SouthIndianBreakfastPageState createState() =>
-      _SouthIndianBreakfastPageState();
+  _ItemSelectionScreenState createState() =>
+      _ItemSelectionScreenState();
 }
 
-class _SouthIndianBreakfastPageState extends State<SouthIndianBreakfastPage> {
+class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
   late int _currentPrice; // Declare a variable to hold the price value
   late String course_name; // Declare a variable to hold the category of dishes
 

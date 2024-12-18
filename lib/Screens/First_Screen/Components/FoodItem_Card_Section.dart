@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Components/Dotted_Divider.dart';
-import 'package:food_app/Screens/Second_Screen/Second_Screen.dart';
+import 'package:food_app/Screens/Second_Screen/ItemSelection.dart';
 
 // Food Items List
 class FoodItemsList extends StatelessWidget {
@@ -10,8 +10,7 @@ class FoodItemsList extends StatelessWidget {
       'name': 'South Indian Breakfast',
       'categories': '7 Categories & 12 Items',
       'price': 249,
-      'image':
-      'https://wallpapercave.com/wp/wp7845825.jpg',
+      'image': 'https://wallpapercave.com/wp/wp7845825.jpg',
       'avatars': [
         'https://wallpapercave.com/wp/wp7845825.jpg',
         'https://wallpapercave.com/wp/wp7845825.jpg',
@@ -26,8 +25,7 @@ class FoodItemsList extends StatelessWidget {
       'name': 'Indian Soiree',
       'categories': '7 Categories & 10 Items',
       'price': 189,
-      'image':
-      'https://s4.scoopwhoop.com/dan/spicyfood1/15.jpg',
+      'image': 'https://s4.scoopwhoop.com/dan/spicyfood1/15.jpg',
       'avatars': [
         'https://s4.scoopwhoop.com/dan/spicyfood1/15.jpg',
         'https://s4.scoopwhoop.com/dan/spicyfood1/15.jpg',
@@ -42,8 +40,7 @@ class FoodItemsList extends StatelessWidget {
       'name': 'South Indian Delight',
       'categories': '7 Categories & 14 Items',
       'price': 299,
-      'image':
-      'https://th.bing.com/th/id/OIP.UWiKrM17pfPujsmsSvrNGAAAAA?rs=1&pid=ImgDetMain',
+      'image': 'https://th.bing.com/th/id/OIP.UWiKrM17pfPujsmsSvrNGAAAAA?rs=1&pid=ImgDetMain',
       'avatars': [
         'https://th.bing.com/th/id/OIP.UWiKrM17pfPujsmsSvrNGAAAAA?rs=1&pid=ImgDetMain',
         'https://th.bing.com/th/id/OIP.UWiKrM17pfPujsmsSvrNGAAAAA?rs=1&pid=ImgDetMain',
@@ -60,11 +57,11 @@ class FoodItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: EdgeInsets.all(12),
-        itemCount: dishes.length,
-        itemBuilder: (context, index) => FoodItemCard(
-          dishData: dishes[index],
-        ),
+      padding: EdgeInsets.all(12),
+      itemCount: dishes.length,
+      itemBuilder: (context, index) => FoodItemCard(
+        dishData: dishes[index],
+      ),
     );
   }
 }
@@ -85,6 +82,10 @@ class _FoodItemCardState extends State<FoodItemCard> {
   @override
   Widget build(BuildContext context) {
     double cardHeight = MediaQuery.of(context).size.height * 0.3;
+    int price = widget.dishData['price'];
+
+    // Ensuring the price is within the range of 189 to 299
+    price = price < 189 ? 189 : (price > 299 ? 299 : price);
 
     return Container(
       margin: EdgeInsets.only(bottom: 12),
@@ -182,7 +183,7 @@ class _FoodItemCardState extends State<FoodItemCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(text: TextSpan(children: [
-                          TextSpan(text: '₹${widget.dishData['price']}',
+                          TextSpan(text: '₹$price',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16,color: Colors.black),),
                           TextSpan(text: '/guest',style: TextStyle(fontSize: 15,color: Colors.grey))
@@ -194,7 +195,6 @@ class _FoodItemCardState extends State<FoodItemCard> {
                             Text('Dynamic Price',style: TextStyle(color: Color(0xff6318AF),fontSize: 10),)
                           ],
                         )
-                        // Text('Add guest count to see')
                       ],
                     ),
                     ElevatedButton(
@@ -202,8 +202,8 @@ class _FoodItemCardState extends State<FoodItemCard> {
                         Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) => SouthIndianBreakfastPage(
-                              price: widget.dishData['price'],
+                            pageBuilder: (context, animation, secondaryAnimation) => ItemSelectionScreen(
+                              price: price,
                               name: widget.dishData['name'],
                             ),
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -218,8 +218,7 @@ class _FoodItemCardState extends State<FoodItemCard> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff6318AF),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
                       child: Row(
                         children: [
