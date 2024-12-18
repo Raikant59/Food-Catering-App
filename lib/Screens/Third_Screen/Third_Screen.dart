@@ -204,16 +204,23 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
           ),
           onPressed: () {
             Navigator.push(
-                 context,
-                 MaterialPageRoute(
-                   builder: (context) => OrderReviewScreen(
-                     totalGuests: totalGuests,
-                     pricePerPlate: pricePerPlate,
-                     selectedDate: selectedDate,
-                     selectedTime: selectedTime,
-                   ),
-                 ),
-               );
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => OrderReviewScreen(
+                  totalGuests: totalGuests,
+                  pricePerPlate: pricePerPlate,
+                  selectedDate: selectedDate,
+                  selectedTime: selectedTime,
+                ),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  // Fade transition
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              ),
+            );
           },
           child: Text(
             "Order Review",
@@ -327,6 +334,7 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
               ),
             ],
           ),
+          // Slider for selecting no of guests
           Slider(
             value: totalGuests.toDouble(),
             min: 10,
@@ -339,8 +347,8 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
             },
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [Text("10(min)             "), Text("             1500(max)")],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text("10(min)",style: TextStyle(color: Colors.black54),), Text("1500(max)",style: TextStyle(color: Colors.black54),)],
           ),
           SizedBox(height: 10,),
           Divider(

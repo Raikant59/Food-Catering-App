@@ -199,17 +199,21 @@ class _FoodItemCardState extends State<FoodItemCard> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Customize Button Action
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text(
-                                  "Customize option selected for ${widget.dishData['name']}")),
-                        );
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (context) => SouthIndianBreakfastPage( price: widget.dishData['price'],name: widget.dishData['name'],), // Route to Second Screen
-                        ),
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) => SouthIndianBreakfastPage(
+                              price: widget.dishData['price'],
+                              name: widget.dishData['name'],
+                            ),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              // Fade transition
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ),
                         );
                       },
                       style: ElevatedButton.styleFrom(

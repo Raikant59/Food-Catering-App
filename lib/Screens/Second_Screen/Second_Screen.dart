@@ -192,10 +192,26 @@ class _SouthIndianBreakfastPageState extends State<SouthIndianBreakfastPage> {
             ])),
             ElevatedButton(
               onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => FillDetailsScreen(pricePerPlate: _currentPrice.toDouble(),name: course_name,), // Navigate to Third Screen
+                //   ),
+                // );
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => FillDetailsScreen(pricePerPlate: _currentPrice.toDouble(),name: course_name,), // Navigate to Third Screen
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        FillDetailsScreen(
+                          pricePerPlate: _currentPrice.toDouble(),
+                          name: course_name,
+                        ),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
                   ),
                 );
               },
