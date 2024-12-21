@@ -9,7 +9,7 @@ class FoodItemsList extends StatelessWidget {
     {
       'name': 'South Indian Breakfast',
       'categories': '7 Categories & 12 Items',
-      'price': 249,
+      'price': 299,
       'image': 'https://wallpapercave.com/wp/wp7845825.jpg',
       'avatars': [
         'https://wallpapercave.com/wp/wp7845825.jpg',

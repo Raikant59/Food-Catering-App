@@ -252,11 +252,20 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
       ),
     );
   }
-
   // Price Per Plate Section
   Widget _buildPriceSection() {
-    double price=(20/100)*pricePerPlate;
-    double finalprice=pricePerPlate-price;
+    // Calculate dynamic pricing and discount
+    double basePrice = 299; // Price per plate for 10 guests
+    double minPrice = 189; // Price per plate for 1500 guests
+    double maxGuests = 1500.0;
+    double minGuests = 10.0;
+
+    // Calculate the price per plate after applying the discount
+    double currentPrice = basePrice - ((basePrice - minPrice) * (totalGuests - minGuests) / (maxGuests - minGuests));
+
+    // Calculate the current discount percentage based on the number of guests
+    double discountPercentage = ((basePrice - currentPrice) / basePrice) * 100;
+
     return Container(
       padding: EdgeInsets.all(22),
       decoration: BoxDecoration(
@@ -276,18 +285,18 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
                   style: TextStyle(color: Colors.black),
                   children: [
                     TextSpan(
-                        text: "20% ",
+                        text: "${discountPercentage.toStringAsFixed(0)}% ",
                         style: TextStyle(color: Colors.green, fontSize: 14)),
                     TextSpan(
                         text: "↓ ",
                         style: TextStyle(color: Colors.black, fontSize: 17)),
                     TextSpan(
-                        text: "₹${pricePerPlate.toStringAsFixed(2)} ",
+                        text: "₹299 ",
                         style: TextStyle(
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough)),
                     TextSpan(
-                        text: " ₹${finalprice.toStringAsFixed(0)}",
+                        text: " ₹${currentPrice.toStringAsFixed(0)}",
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -334,7 +343,7 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
               ),
             ],
           ),
-          // Slider for selecting no of guests
+          // Slider for selecting number of guests
           Slider(
             value: totalGuests.toDouble(),
             min: 10,
@@ -375,4 +384,5 @@ class _FillDetailsScreenState extends State<FillDetailsScreen> {
       ),
     );
   }
+
 }
