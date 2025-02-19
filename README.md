@@ -1,4 +1,4 @@
-# CraftMyPlate-Assignment
+# Food Catering App
 
 ### Objective
 Develop a Flutter application based on the provided Figma designs [Link](https://www.figma.com/design/VebfUm70gaotnKb6IWldLT/Assignment?t=lW3ISDILoGlVNsdJ-0), ensuring responsiveness and complete functionality.
